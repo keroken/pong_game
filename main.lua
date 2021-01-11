@@ -27,9 +27,20 @@ end
 function love.draw()
   push:apply('start')
 
+  -- set background color
   love.graphics.clear(40/255, 45/255, 52/255, 255/255)
 
+  -- print title
   love.graphics.printf('Hello Pong', 0, 20, VIRTUAL_WIDTH, 'center')
+
+  -- fist paddle(left)
+  love.graphics.rectangle('fill', 10, 30, 5, 20)
+
+  -- second paddle(right)
+  love.graphics.rectangle('fill', VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 50, 5, 20)
+
+  -- ball(center)
+  love.graphics.rectangle('fill', VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4)
 
   push:apply('end')
 end
