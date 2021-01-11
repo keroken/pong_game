@@ -58,6 +58,15 @@ function love.draw()
   -- print title
   love.graphics.printf('Hello Pong', 0, 20, VIRTUAL_WIDTH, 'center')
 
+  -- print scores
+  love.graphics.setFont(scoreFont)
+  love.graphics.print(tostring(player1Score),
+    VIRTUAL_WIDTH / 2 - 50, 
+    VIRTUAL_HEIGHT / 3)
+  love.graphics.print(tostring(player2Score),
+    VIRTUAL_WIDTH / 2 + 30, 
+    VIRTUAL_HEIGHT / 3)
+
   -- fist paddle(left)
   love.graphics.rectangle('fill', 10, player1Y, 5, 20)
 
