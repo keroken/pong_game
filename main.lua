@@ -1,4 +1,7 @@
 push = require 'push'
+Class = require 'class'
+require 'Paddle'
+require 'Ball'
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
@@ -27,11 +30,7 @@ function love.load()
   player1Y = 30
   player2Y = VIRTUAL_HEIGHT - 50
 
-  ballX = VIRTUAL_WIDTH / 2 - 2
-  ballY = VIRTUAL_HEIGHT / 2 - 2
-
-  ballDX = math.random(2) == 1 and 100 or -100
-  ballDY = math.random(-50, 50)
+  ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4)
 
   gameState = 'start'
 end
@@ -52,8 +51,7 @@ function love.update(dt)
   end
 
   if gameState == 'play' then
-    ballX = ballX + ballDX * dt
-    ballY = ballY + ballDY * dt
+    ball:update(dt)
   end
 end
 
@@ -65,12 +63,7 @@ function love.keypressed(key)
       gameState = 'play'
     else
       gameState = 'start'
-
-      ballX = VIRTUAL_WIDTH / 2 - 2
-      ballY = VIRTUAL_HEIGHT / 2 - 2
-
-      ballDX = math.random(2) == 1 and 100 or -100
-      ballDY = math.random(-50, 50) * 1.5
+      ball:reset()
     end
   end
 end
@@ -105,7 +98,7 @@ function love.draw()
   love.graphics.rectangle('fill', VIRTUAL_WIDTH - 10, player2Y, 5, 20)
 
   -- ball(center)
-  love.graphics.rectangle('fill', ballX, ballY, 4, 4)
+  ball:render()
 
   push:apply('end')
 end
